@@ -20,7 +20,6 @@ LDA FNL /load the largest number to the AC for output
 COF1, SKO /busy wait for output of largest number
 BUN COF1
 OUT
-CLA /clear accumulator
 LDA FNS /load the smallest number to the AC for output
 COF2, SKO /busy wait for output of largest number
 BUN COF2
