@@ -1,0 +1,17 @@
+//Tests LDA, CMA, INC, ADD, STA
+ORG 100
+LDA N1
+ADD N2
+STA F1 //Write a 0003 to RAM at Location 200
+LDA N3 
+CMA
+INC
+ADD F1
+STA F2
+HLT
+N1, HEX 001
+N2, HEX 002
+N3, HEX 003
+F1, HEX 200 /200 is the value of F1
+F2, HEX 201 
+END
