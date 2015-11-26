@@ -1,0 +1,102 @@
+/Kate Evans and Angela Huang
+/Smallest Largest Class 34 Programming Assignment
+/11-20-2015
+ORG 300
+CIF1, SKI /busy wait for input 1
+BUN CIF1
+INP
+STA N1
+CIF2, SKI /busy wait for input 2
+BUN CIF2
+INP
+STA N2
+CIF3, SKI /busy wait for input 3
+BUN CIF3
+INP
+STA N3
+BSA LRG /call LRG subprogram
+BSA SML /call SML subprogram
+LDA FNL /load the largest number to the AC for output
+COF1, SKO /busy wait for output of largest number
+BUN COF1
+OUT
+CLA /clear accumulator
+LDA FNS /load the smallest number to the AC for output
+COF2, SKO /busy wait for output of largest number
+BUN COF2
+OUT
+HLT /end program
+SML, HEX 0 /start of SML subprogram 
+IFS, LDA N2 
+CMA
+INC
+ADD N1 /subtracts N1-N2
+SNA /checks if negative
+BUN CA2 /if not negative, branch to Case2
+LDA N3 
+CMA
+INC
+ADD N1 /subtracts N1-N3
+SNA /checks if negative 
+BUN CA2 
+LDA N1 
+STA FNS /if both negative, store N1 as final value
+BUN EDS 
+CA2, LDA N1 /start of Case2
+CMA 
+INC
+ADD N2 /subtract N2-N1
+SNA
+BUN CA3 /if not negative, branch to Case3
+LDA N3 
+CMA
+INC
+ADD N2 /subtract N2-N3
+SNA /checks if negative
+BUN CA3 /if not negative, branch to Case 3
+LDA N2
+STA FNS
+BUN EDS /branch to end of subprogram 
+CA3, LDA N3 
+STA FNS /store N3 as smallest
+EDS, BUN SML I /branches back to main
+LRG, HEX 600 /start of LRG subprogram
+IFL, LDA N2 /begin case 1
+CMA
+INC
+ADD N1 /subtracts N1-N2
+SPA /skip if positive
+BUN CL2 /branch to case2 if not positive
+LDA N3
+CMA
+INC
+ADD N1 /subtracts N1-N3
+SPA /skip if result is positive
+BUN CL2 /branch to case2 if not positive
+LDA N1
+STA FNL /if case one is true then store the value as the largest number
+BUN EDL /branch to end of subprogram
+CL2, LDA N1 /begin case2
+CMA
+INC
+ADD N2 /subtract N2 - N1
+SPA /skip if positive
+BUN CL3 /branch to case3 if not positive
+LDA N3
+CMA
+INC
+ADD N2 /subtract N2 - N3
+SPA /skip if positive
+BUN CL3 /branch to case3 if not positive
+LDA N2 
+STA FNL /if case2 is true then store the value as the largest number
+BUN EDL /branch to end of subprogram
+CL3, LDA N3 /begin case3
+STA FNL /if case1 and case2 are not true then case3 is true and store as the largest num
+EDL, BUN LRG I /branch back to main program
+N1, DEC 0
+N2, DEC 0
+N3, DEC 0
+FNL, HEX 400
+FNS, HEX 500
+END
